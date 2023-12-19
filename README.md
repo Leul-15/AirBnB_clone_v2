@@ -1,4 +1,4 @@
-<center> <h1>AirBnB clone - MySQL</h1> </center>
+<center> <h1>AirBnB clone  MySQL</h1> </center>
 <h3>replace the file storage by a Database storage</h3>
 <h3>map your models to a table in database by using an O.R.M.</h3>
 <center> <h1>HBNB - The Console</h1> </center>
