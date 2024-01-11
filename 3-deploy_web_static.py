@@ -28,10 +28,10 @@ def do_deploy(archive_path):
     """
     if os.path.isfile(archive_path) is False:
         return False
-    fullFile = archive_path.split("/")[-1]
-    folder = fullFile.split(".")[0]
+    filename = archive_path.split("/")[-1]
+    folder = filename.split(".")[0]
 
-    if put(archive_path, "/tmp/{}".format(fullFile)).failed is True:
+    if put(archive_path, "/tmp/{}".format(filename)).failed is True:
         return False
 
     if run("rm -rf /data/web_static/releases/{}/".
@@ -43,10 +43,10 @@ def do_deploy(archive_path):
         return False
 
     if run("tar -xzf /tmp/{} -C /data/web_static/releases/{}/".
-           format(fullFile, folder)).failed is True:
+           format(filename, folder)).failed is True:
         return False
 
-    if run("rm /tmp/{}".format(fullFile)).failed is True:
+    if run("rm /tmp/{}".format(filename)).failed is True:
         return False
 
     if run("mv /data/web_static/releases/{}/web_static/* "
