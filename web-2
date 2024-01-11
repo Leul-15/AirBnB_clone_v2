@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Use ssh to connect
+
+eval $("ssh-agent")
+
+ssh-add ~/.ssh/id_rsa
+
+ssh ubuntu@100.26.213.217
