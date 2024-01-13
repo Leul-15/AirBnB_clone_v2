@@ -18,7 +18,7 @@ def do_pack():
     filePath = 'versions/web_static_{}.tgz'.format(timestamp)
 
     local('mkdir -p versions/')
-    newArchive = local('tar -cvzf {} web_static/'.format(filePath), capture=True)
+    newArchive = local('tar -cvzf {} web_static/'.format(filePath))
 
     if newArchive.succeeded:
         return filePath
