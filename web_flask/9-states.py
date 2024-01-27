@@ -11,22 +11,24 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 app = Flask(__name__)
 
 
-@app.route('/states', strict_slashes=False)
+@app.route("/states", strict_slashes=False)
 def states():
-    states = storage.all("State")
-    return render_template('9-states.html', states=states)
+    """
+    Retrieve all states from storage and render them in the template.
+    """
+    states = storage.all("State").values()
+    return render_template("9-states.html", state=states)
 
 
-@app.route('/states/<id>', strict_slashes=False)
+@app.route("/states/<id>", strict_slashes=False)
 def states_id(id):
-    states = storage.all("State")
-    found_state = ""
-    for s_id in states:
-        if s_id == id:
-            found_state = states[s_id]
-
-    return render_template('9-states.html',
-                           state=found_state)
+    """
+    Retrieve a state by its ID and render the corresponding template.
+    """
+    for state in storage.all("State").values():
+        if state.id == id:
+            return render_template("9-states.html", state=state)
+    return render_template("9-states.html")
 
 
 @app.teardown_appcontext
