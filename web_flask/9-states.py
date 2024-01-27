@@ -12,18 +12,15 @@ app = Flask(__name__)
 
 @app.route("/states", strict_slashes=False)
 def states():
+    """Displays an HTML page with a list of all States
     """
-    Retrieve all states from storage and render them in the template.
-    """
-    states = storage.all("State").values()
+    states = storage.all("State")
     return render_template("9-states.html", state=states)
 
 
 @app.route("/states/<id>", strict_slashes=False)
 def states_id(id):
-    """
-    Retrieve a state by its ID and render the corresponding template.
-    """
+    """Displays an HTML page with info about <id>, if it exists"""
     for state in storage.all("State").values():
         if state.id == id:
             return render_template("9-states.html", state=state)
