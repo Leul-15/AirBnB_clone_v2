@@ -9,9 +9,10 @@ from models.state import State
 from sqlalchemy.orm import scoped_session, sessionmaker
 
 app = Flask(__name__)
+app.url_map.strict_slashes = False
 
 
-@app.route("/states", strict_slashes=False)
+@app.route("/states")
 def states():
     """
     Retrieve all states from storage and render them in the template.
@@ -20,7 +21,7 @@ def states():
     return render_template("9-states.html", state=states)
 
 
-@app.route("/states/<id>", strict_slashes=False)
+@app.route("/states/<id>")
 def states_id(id):
     """
     Retrieve a state by its ID and render the corresponding template.
