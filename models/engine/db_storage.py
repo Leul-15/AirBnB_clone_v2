@@ -21,6 +21,7 @@ class DBStorage:
     """
     __engine = None
     __session = None
+
     def __init__(self):
         """Create engine and link to MySQL databse"""
         self.__engine = create_engine("mysql+mysqldb://{}:{}@{}/{}".
@@ -31,7 +32,7 @@ class DBStorage:
                                              pool_pre_ping=True))
         if getenv("HBNB_ENV") == "test":
             Base.metadata.drop_all(self.__engine)
-    
+
     def all(self, cls=None):
         """Query current database session
         """
@@ -47,23 +48,23 @@ class DBStorage:
                 cls = eval(cls)
             new_objs = self.__session.query(cls)
         return {"{}.{}".format(type(o).__name__, o.id): o for o in new_objs}
-    
+
     def new(self, obj):
         """Add the object to the current database session
         """
         self.__session.add(obj)
-    
+
     def save(self):
         """Commit all changes of the current database session
         """
         self.__session.commit()
-    
+
     def delete(self, obj=None):
         """Delete from the current database session
         """
         if obj is not None:
             self.__session.delete(obj)
-    
+
     def reload(self):
         """Commit all changes of current database session
         """
@@ -72,7 +73,7 @@ class DBStorage:
                                     expire_on_commit=False)
         Session = scoped_session(session_fact)
         self.__session = Session()
-    
+
     def close(self):
         """Close working SQLalchemy session
         """
